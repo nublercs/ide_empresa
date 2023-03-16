@@ -1,0 +1,10 @@
+{
+    "domain": "ide_empresa",
+    "name": "I-de empresa",
+    "codeowners": ["@nublercs"],
+    "dependencies": [],
+    "documentation": "https://github.com/nublercs/ide_empresa/",
+    "iot_class": "cloud_polling",
+    "requirements": [],
+    "version": "0.1.0"
+  }
