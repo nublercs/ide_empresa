@@ -22,7 +22,7 @@ def setup_platform(
 class ConsumoSensor(Entity):
     @property
     def name(self) -> str | None:
-        return "consumoooxcvds"
+        return "consumoo"
 
     @property
     def state(self) -> StateType:
