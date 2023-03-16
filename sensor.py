@@ -4,6 +4,7 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.typing import (
     ConfigType,
     DiscoveryInfoType,
+    HomeAssistantType,
     StateType,
 )
 
