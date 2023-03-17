@@ -1,33 +1,30 @@
-from typing import Callable, Optional
+from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfEnergy
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.typing import (
-    ConfigType,
-    DiscoveryInfoType,
-    HomeAssistantType,
-    StateType,
-)
+
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
 
 def setup_platform(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     config: ConfigType,
-    async_add_entities: Callable,
-    discovery_info: Optional[DiscoveryInfoType] = None,
+    add_entities: AddEntitiesCallback,
+    discovery_info: DiscoveryInfoType | None = None,
 ) -> None:
-    sensors = [ConsumoSensor]
-    async_add_entities(sensors, update_before_add=True)
+    """Set up the sensor platform."""
+    add_entities([ConsumoSensor()])
 
 
-class ConsumoSensor(Entity):
-    @property
-    def name(self) -> str | None:
-        return "consumooo"
+class ConsumoSensor(SensorEntity):
+    _attr_name = "ConsumoSensor"
+    _attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+    _attr_device_class = SensorDeviceClass.ENERGY
+    _attr_state_class = SensorStateClass.TOTAL
 
-    @property
-    def state(self) -> StateType:
-        return 0
-
-    @property
-    def unit_of_measurement(self) -> str | None:
-        return UnitOfEnergy.KILO_WATT_HOUR
+    def update(self) -> None:
+        """Fetch new state data for the sensor.
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        self._attr_native_value = 23
